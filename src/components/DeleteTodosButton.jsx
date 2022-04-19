@@ -1,0 +1,1 @@
+export const DeleteTodosButton = ({ setTodos }) => <button onClick={() => setTodos([])}>Delete All Todos</button>

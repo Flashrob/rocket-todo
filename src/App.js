@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { CreateTodoForm } from './components/CreateTodoForm';
+import { DeleteTodosButton } from './components/DeleteTodosButton';
 import { TodoList } from './components/TodoList';
 
 function App() {
@@ -21,14 +23,13 @@ function App() {
 
   return (
     <>
-      <h1>Todo Application</h1>
-      <button onClick={() => setTodos([])}>Delete All Todos</button>
-      <form onSubmit={createTodoHandler}>
-        <input value={input} onChange={(e) => setInput(e.target.value)} />
-        <button type='submit' onClick={createTodoHandler}>
-          Create Todo
-        </button>
-      </form>
+      <h1>Todo Application</h1> 
+      <DeleteTodosButton setTodos={setTodos} />
+      <CreateTodoForm
+        createTodo={createTodoHandler}
+        input={input}
+        setInput={setInput}
+      />
       <TodoList todos={todos} deleteTodo={deleteTodoHandler} />
     </>
   );
