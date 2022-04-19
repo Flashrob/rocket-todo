@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TodoList } from './components/TodoList';
 
 function App() {
   const [input, setInput] = useState('');
@@ -28,12 +29,7 @@ function App() {
           Create Todo
         </button>
       </form>
-      {todos.map((todo, index) => (
-        <div>
-          <span key={todo + index}>{todo}</span>
-          <button onClick={() => deleteTodoHandler(index)}>Delete</button>
-        </div>
-      ))}
+      <TodoList todos={todos} deleteTodo={deleteTodoHandler} />
     </>
   );
 }
