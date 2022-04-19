@@ -4,7 +4,9 @@ function App() {
   const [input, setInput] = useState('');
   const [todos, setTodos] = useState([]);
 
-  const createTodoHandler = () => {
+  const createTodoHandler = (e) => {
+    e.preventDefault();
+    if (!input) return;
     setTodos([...todos, input]);
     setInput('');
   };
@@ -19,9 +21,13 @@ function App() {
   return (
     <>
       <h1>Todo Application</h1>
-      <input value={input} onChange={(e) => setInput(e.target.value)} />
-      <button onClick={createTodoHandler}>Create Todo</button>
       <button onClick={() => setTodos([])}>Delete All Todos</button>
+      <form onSubmit={createTodoHandler}>
+        <input value={input} onChange={(e) => setInput(e.target.value)} />
+        <button type='submit' onClick={createTodoHandler}>
+          Create Todo
+        </button>
+      </form>
       {todos.map((todo, index) => (
         <div>
           <span key={todo + index}>{todo}</span>
