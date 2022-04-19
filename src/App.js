@@ -2,11 +2,18 @@ import { useState } from 'react';
 
 function App() {
   const [input, setInput] = useState('');
+  const [todos, setTodos] = useState([]);
+
+  const createTodoHandler = () => {
+    setTodos([...todos, input]);
+    setInput('');
+  };
+
   return (
     <>
       <h1>Todo Application</h1>
       <input value={input} onChange={(e) => setInput(e.target.value)} />
-      <button>Create Todo</button>
+      <button onClick={createTodoHandler}>Create Todo</button>
     </>
   );
 }
