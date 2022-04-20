@@ -1,7 +1,18 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 import { CreateTodoForm } from './components/CreateTodoForm';
 import { DeleteTodosButton } from './components/DeleteTodosButton';
 import { TodoList } from './components/TodoList';
+
+const Container = styled.div`
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
 
 function App() {
   const [input, setInput] = useState('');
@@ -31,7 +42,7 @@ function App() {
   };
 
   return (
-    <>
+    <Container>
       <h1>Todo Application</h1>
       <DeleteTodosButton setTodos={setTodos} />
       <CreateTodoForm
@@ -44,7 +55,7 @@ function App() {
         deleteTodo={deleteTodoHandler}
         updateTodo={updateTodo}
       />
-    </>
+    </Container>
   );
 }
 
