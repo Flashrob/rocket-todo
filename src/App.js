@@ -10,6 +10,7 @@ function App() {
   const createTodoHandler = (e) => {
     e.preventDefault();
     if (!input) return;
+    if (todos.includes(input)) return setInput('');
     setTodos([...todos, input]);
     setInput('');
   };
@@ -21,16 +22,28 @@ function App() {
     setTodos(todosAfterDelete);
   };
 
+  const updateTodo = (todo, index) => {
+    const updatedTodos = todos.map((todoItem, todoIndex) => {
+      if (todoIndex === index) return todo;
+      return todoItem;
+    });
+    setTodos(updatedTodos);
+  };
+
   return (
     <>
-      <h1>Todo Application</h1> 
+      <h1>Todo Application</h1>
       <DeleteTodosButton setTodos={setTodos} />
       <CreateTodoForm
         createTodo={createTodoHandler}
         input={input}
         setInput={setInput}
       />
-      <TodoList todos={todos} deleteTodo={deleteTodoHandler} />
+      <TodoList
+        todos={todos}
+        deleteTodo={deleteTodoHandler}
+        updateTodo={updateTodo}
+      />
     </>
   );
 }
