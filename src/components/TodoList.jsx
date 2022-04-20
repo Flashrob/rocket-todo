@@ -10,7 +10,14 @@ align-items: flex-end;
 `
 
 export const TodoList = ({ todos, deleteTodo, updateTodo }) => {
-    return (<Container>{todos.map((todo, index) => (
-      <Todo key={todo} todo={todo} index={index} deleteTodo={deleteTodo} updateTodo={updateTodo} />
-    ))}</Container>)
+  const todoItems = todos.map((todo, index) => (
+    <Todo
+      key={todo}
+      todo={todo}
+      index={index}
+      deleteTodo={deleteTodo}
+      updateTodo={updateTodo}
+    />
+  ))
+    return <Container>{todoItems}</Container>;
 }

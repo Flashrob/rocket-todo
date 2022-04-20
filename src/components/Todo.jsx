@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import './Todo.css';
 
 const Item = styled.span`
-margin-right: 10px;`
+margin-right: 10px;
+${(props) => props.isDone && `text-decoration: line-through;`}
+`
 
 const DeleteButton = styled.button`
 background-color: red;
@@ -27,7 +28,12 @@ export const Todo = ({ todo, index, deleteTodo, updateTodo }) => {
     <div>   
         {!isEditing && (
         <>
-            <Item {...(isDone && { className: 'done' })} key={todo + index} onClick={() => setIsDone(!isDone)}>{todo}</Item>
+            <Item
+                {...(isDone && { isDone: true })}
+                key={todo + index}
+                onClick={() => setIsDone(!isDone)}>
+                {todo}
+            </Item>
             <DeleteButton onClick={() => deleteTodo(index)}>Delete</DeleteButton>
             <EditButton onClick={() => setIsEditing(true)}>Edit</EditButton>
         </>
@@ -35,11 +41,19 @@ export const Todo = ({ todo, index, deleteTodo, updateTodo }) => {
 
         {isEditing && (
             <>
-                    <Input type="text" value={editText} onChange={(e) => setEditText(e.target.value)} />
-                    <SaveButton onClick={() => { 
+                <Input
+                    type="text"
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                />
+                <SaveButton 
+                    onClick={() => { 
                         updateTodo(editText, index);
                         setIsEditing(false); 
-                    } }>Save</SaveButton>
+                    }}
+                >
+                    Save
+                </SaveButton>
             </>
         )}
     </div>
